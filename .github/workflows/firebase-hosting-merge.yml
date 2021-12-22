@@ -19,7 +19,7 @@ jobs:
 
       - name: Build by DockerCompose
 #     - run: npm ci && npm run build
-      - run: |
+        run: |
         export ENV=".prd"
         docker-compose run --rm front sh -c "npm install  && npm run build"
 
