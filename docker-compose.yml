@@ -1,0 +1,18 @@
+version: '3'
+x-var: &ENV_FILE ".env"
+services:
+  front:
+    build:
+      context: ./front
+      dockerfile: ../docker/front.Dockerfile
+    env_file:
+      - *ENV_FILE
+    ports:
+      - '3000:3000'
+    volumes:
+      - './front:/work/front'
+    command: sh -c 'npm install && npm start'
+    tty: true      
+    stdin_open: true
+
+
