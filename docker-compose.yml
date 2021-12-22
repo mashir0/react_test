@@ -1,5 +1,5 @@
 version: '3'
-x-var: &ENV_FILE ".env"
+x-var: &ENV_FILE ".env${ENV}"
 services:
   front:
     build:
