@@ -17,6 +17,7 @@ jobs:
 
       - name: chk version 
         run: |
+          npde --version 
           npm --version 
           cat /etc/os-release
 
