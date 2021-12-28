@@ -10,10 +10,21 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: checkout  
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build by DockerCompose
 #     - run: npm ci && npm run build
-      - run: docker-compose run --rm front sh -c "npm install  && npm run build"
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+        run: |
+          export ENV=".prd"
+          docker-compose run --rm front sh -c "npm install  && npm run build"
+
+      - name: Preview Deploy
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_REACT_TEST_5DA14 }}'
